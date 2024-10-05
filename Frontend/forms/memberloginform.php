@@ -16,6 +16,33 @@ function validateFullname($fullname) {
     return preg_match("/^[a-zA-Z\s\-'\"]+$/", $fullname);
 }
 
+
+// Validate email format
+function validateEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function validateEmailDomain($email) {
+    $allowedDomains = ['@strathmore.edu', '@gmail.com', '@yahoo.com', '@mada.co.ke'];
+    $blockedDomains = ['@yanky.net'];
+    
+    $emailDomain = substr(strrchr($email, "@"), 1);  // Get the email domain
+    
+    foreach ($blockedDomains as $blocked) {
+        if (strpos($email, $blocked) !== false) {
+            return false;  // Email is blocked
+        }
+    }
+
+    foreach ($allowedDomains as $allowed) {
+        if (strpos($email, $allowed) !== false) {
+            return true;   // Email is allowed
+        }
+    }
+
+    return false;
+}
+
 class memberloginform{
     public function loginform(){
         ?>
