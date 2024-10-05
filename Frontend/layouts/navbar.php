@@ -4,8 +4,8 @@ class Navbar {
     private $isAdmin;
 
     public function __construct($isLoggedIn, $isAdmin) {
-        $this->isLoggedIn = $isLoggedIn; // Corrected variable assignment
-        $this->isAdmin = $isAdmin; // Correctly set the isAdmin property
+        $this->isLoggedIn = $isLoggedIn; 
+        $this->isAdmin = $isAdmin; 
     }
 
     public function render_navbar() {
