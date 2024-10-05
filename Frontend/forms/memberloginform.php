@@ -2,6 +2,11 @@
 
 session_start();
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';  // Include PHPMailer autoload
+
 $isLoggedIn = isset($_SESSION['user_id']);
 $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
 
@@ -58,6 +63,40 @@ function usernameExists($pdo, $username) {
     $stmt->execute([$username]);
     return $stmt->fetchColumn() > 0;
 }
+
+
+
+// Generate OTP
+$otp = rand(100000, 999999);
+
+function sendOTP($email, $otp) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.example.com';  // Set the SMTP server to send through
+        $mail->SMTPAuth = true;
+        $mail->Username = 'your_email@example.com';
+        $mail->Password = 'your_password';
+        $mail->SMTPSecure = 'tls';   // Enable TLS encryption
+        $mail->Port = 587;           // TCP port to connect to
+
+        // Recipients
+        $mail->setFrom('your_email@example.com', 'Your Name');
+        $mail->addAddress($email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'OTP Verification';
+        $mail->Body    = "Your OTP is: <b>$otp</b>";
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+
 
 
 class memberloginform{
