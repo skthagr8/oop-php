@@ -1,5 +1,16 @@
 <?php
 
+session_start();
+
+$isLoggedIn = isset($_SESSION['user_id']);
+$isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+
+
+function sanitizeInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+
 class memberloginform{
     public function loginform(){
         ?>
@@ -13,21 +24,10 @@ class memberloginform{
         </head>
         <body>
         <div class="container mt-5 mb-5 container rounded-5 p-4 shadow">
-            <h1 class=" col mb-3 ">Sign Up</h1>
+            <h1 class=" col mb-3 ">Login</h1>
  
             <form action="submit_borrow.php" method="POST" class=''> <!-- Specify the action and method -->
-                <div class=''>
-                <div class='row'>
-                <div class="col mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" name="first_name" class="form-control" required> <!-- Added type and class -->
-                </div>
 
-                <div class="col mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" required> <!-- Added type and class -->
-                </div>
-            </div>
 
             <div class='row'>
                 <div class="col mb-3">
