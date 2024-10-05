@@ -9,6 +9,14 @@ try {
     exit;
 }
 
+try {
+    // Render the navbar
+    $navbar->render_navbar();
+} catch (\Throwable $th) {
+    echo 'Function called does not exist: ' . $th->getMessage();
+    exit;
+}
+
 // Check if the user is logged in and if they are an admin
 $isLoggedIn = isset($_SESSION['user_id']);
 $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
