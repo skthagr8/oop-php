@@ -11,6 +11,11 @@ function sanitizeInput($data) {
 }
 
 
+// Validate fullname (letters, space, dash, quotation)
+function validateFullname($fullname) {
+    return preg_match("/^[a-zA-Z\s\-'\"]+$/", $fullname);
+}
+
 class memberloginform{
     public function loginform(){
         ?>
