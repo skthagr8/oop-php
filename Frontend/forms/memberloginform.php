@@ -96,7 +96,13 @@ function sendOTP($email, $otp) {
     }
 }
 
+// Store OTP in session (or database)
+$_SESSION['otp'] = $otp; 
 
+// Verify OTP
+function verifyOTP($userOtp) {
+    return $userOtp == $_SESSION['otp'];  // Compare input OTP with session OTP
+}
 
 
 class memberloginform{
