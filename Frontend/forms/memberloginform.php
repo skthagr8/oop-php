@@ -47,6 +47,11 @@ function validatePasswordLength($password) {
     return strlen($password) >= 4 && strlen($password) <= 8;
 }
 
+function emailExists($pdo, $email) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    return $stmt->fetchColumn() > 0;
+}
 
 
 class memberloginform{
