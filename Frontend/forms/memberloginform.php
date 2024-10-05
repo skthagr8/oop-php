@@ -43,6 +43,11 @@ function validateEmailDomain($email) {
     return false;
 }
 
+function validatePasswordLength($password) {
+    return strlen($password) >= 4 && strlen($password) <= 8;
+}
+
+
 class memberloginform{
     public function loginform(){
         ?>
