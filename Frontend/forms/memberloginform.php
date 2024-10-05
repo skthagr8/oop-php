@@ -53,6 +53,12 @@ function emailExists($pdo, $email) {
     return $stmt->fetchColumn() > 0;
 }
 
+function usernameExists($pdo, $username) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    return $stmt->fetchColumn() > 0;
+}
+
 
 class memberloginform{
     public function loginform(){
