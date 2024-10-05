@@ -1,6 +1,5 @@
 <?php
 
-
 class memberloginform{
     public function loginform(){
         ?>
@@ -45,6 +44,20 @@ class memberloginform{
 
 <?php
     }
+}
+
+try {
+    $render_loginform = new memberloginform;
+} catch (\Throwable $th) {
+    echo 'Class called does not exist: ' . $th->getMessage();
+    exit;
+}
+
+try {
+    $render_loginform->loginform();
+} catch (\Throwable $th) {
+    echo 'Function called does not exist: ' . $th->getMessage();
+    exit;
 }
 
 ?>
