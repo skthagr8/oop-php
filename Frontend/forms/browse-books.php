@@ -42,13 +42,17 @@ class browsebooks{
         $username = 'root'; // Replace with your MySQL username
         $password = ''; // Replace with your MySQL password
         $dbName = 'booklendingDB'; // Replace with the desired database name
-        // Database connection
+        
         try {
             $pdo = new PDO("mysql:host=$host;charset=utf8mb4", $username, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Could not connect to the database: " . $e->getMessage());
         }
+         // Now connect to the created (or existing) database
+         $pdo->exec("USE `$dbName`");
+         echo "Connected successfully to the database '$dbName'"; // Message on successful connection
+
         // Fetching books from the database
         $books = [];
 

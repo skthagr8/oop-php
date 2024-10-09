@@ -1,19 +1,12 @@
 <?php
 // Start session
 session_start();
+
 // Include the Navbar class
 try {
     require_once('../layouts/navbar.php');
 } catch (\Throwable $e) {
     echo "File not Found or Wrong File Import: " . $e->getMessage();
-    exit;
-}
-
-try {
-    // Render the navbar
-    $navbar->render_navbar();
-} catch (\Throwable $th) {
-    echo 'Function called does not exist: ' . $th->getMessage();
     exit;
 }
 
@@ -25,7 +18,7 @@ try {
     // Create a Navbar instance
     $navbar = new Navbar($isLoggedIn, $isAdmin);
 } catch (\Throwable $th) {
-    echo "Class Not Found: " . $th->getMessage();
+    echo "Error on Class: " . $th->getMessage();
     exit;
 }
 
@@ -33,10 +26,11 @@ try {
     // Render the navbar
     $navbar->render_navbar();
 } catch (\Throwable $th) {
-    echo 'Function called does not exist: ' . $th->getMessage();
+    echo 'Error on Function: ' . $th->getMessage();
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,60 +53,48 @@ try {
 
             <div class='row'>
                 <div class="col mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" name="first_name" class="form-control" required> <!-- Added type and class -->
+                    <label class="form-label" for='member_id'>Member ID</label>
+                    <input type="text" name="member_id" class="form-control" required> <!-- Added type and class -->
                 </div>
 
                 <div class="col mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" required> <!-- Added type and class -->
-                </div>
-            </div>
-
-            <div class='row'>
-                <div class="col mb-3">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" name="email" class="form-control" required> <!-- Added type and class -->
-                </div>
-
-                <div class="col mb-3">
-                    <label class="form-label">Phone Number</label>
+                    <label class="form-label" for='book_id'>Book ID</label>
                     <input type="tel" name="phone" class="form-control" required> <!-- Added type and class -->
                 </div>
             </div>
 
             <div class='row'>
                 <div class="col mb-3">
-                    <label class="form-label">Title of the Book</label>
+                    <label class="form-label" for='book_title'>Title of the Book</label>
                     <input type="text" name="book_title" class="form-control" required> <!-- Added type and class -->
                 </div>
 
                 <div class="col mb-3">
-                    <label class="form-label">Author of the Book</label>
+                    <label class="form-label" for='book_author'>Author of the Book</label>
                     <input type="text" name="book_author" class="form-control" required> <!-- Added type and class -->
                 </div>
             </div>
 
             <div class='row'>
                 <div class="col mb-3">
-                    <label class="form-label">ISBN Number</label>
+                    <label class="form-label" for='book_isbn_no'>ISBN Number</label>
                     <input type="text" name="isbn" class="form-control" required> <!-- Added type and class -->
                 </div>
 
                 <div class="col mb-3">
-                    <label class="form-label">Copy Number</label>
+                    <label class="form-label" for='book_copy_no'>Copy Number</label>
                     <input type="text" name="copy_number" class="form-control" required> <!-- Added type and class -->
                 </div>
             </div>
 
             <div class='row'>
                 <div class="col mb-3">
-                    <label class="form-label">Borrow Date</label>
+                    <label class="form-label" for='borrow_date'>Borrow Date </label>
                     <input type="date" name="borrow_date" class="form-control" value="<?php echo date('Y-m-d'); ?>" required> <!-- Added type and class -->
                 </div>
 
                 <div class="col mb-3">
-                    <label class="form-label">Return Date</label>
+                    <label class="form-label" for='return_date'>Return Date</label>
                     <input type="date" name="return_date" class="form-control" required> <!-- Added type and class -->
                 </div>
             </div>
@@ -125,12 +107,7 @@ try {
             </div>
 
             <div class="col mb-3">
-                <label>Type your name as Consent</label>
-                <input type="text" name="consent_name" class="form-control" required> <!-- Changed textarea to input -->
-            </div>
-
-            <div class="col mb-3">
-                <label>Reason for Borrowing</label>
+                <label class='text_area' for='suggested_reason'>Reason for Borrowing</label>
                 <textarea class="form-control" name="reason" rows="3" required></textarea> <!-- Added name and required -->
             </div>
 
